@@ -32,7 +32,6 @@ namespace CircleGame
         public void AddPoint(Vector3 point)
         {
             _path.Add(point);
-            Debug.Log(_path.Count);
         }
 
         public override void ResetPath()

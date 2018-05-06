@@ -44,7 +44,6 @@ namespace CircleGame
                 }
                 else
                 {
-                    Debug.Log("No points");
                     _circle.ChangeState(CircleStates.Waiting);
                 }
                 

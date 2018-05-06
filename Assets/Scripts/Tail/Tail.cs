@@ -9,23 +9,30 @@ namespace CircleGame
 
         [SerializeField]
         LineRenderer _lineRenderer;
+        [SerializeField]
+        float _minVertexDistance;
 
         Circle _circle;
-        List<Vector3> _positions;
+        Vector3 _lastPosition;
+
 
         [Inject]
         public void Construct(Circle circle)
         {
             _circle = circle;
-            _positions = new List<Vector3>();
+            _lastPosition = _circle.Position;
         }
+
+
 
         void RedrawLine()
         {
-            _positions.Add(_circle.Position);
-            _lineRenderer.positionCount = _positions.Count;
-            _lineRenderer.SetPositions(_positions.ToArray());
-            
+            if (Vector3.Distance(_lastPosition, _circle.Position)>_minVertexDistance)
+            {
+                _lastPosition = _circle.Position;
+                _lineRenderer.positionCount = _lineRenderer.positionCount + 1;
+                _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, _lastPosition);
+            }
         }
 
         
