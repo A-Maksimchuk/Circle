@@ -6,17 +6,17 @@ using Zenject;
 
 namespace CircleGame
 {
-    public class PathController : PathControllerBase
+    public class PathController : IPathController, IInitializable, IDisposable
     {
         private List<Vector3> _path;
 
 
-        public override void Initialize()
+        public virtual void Initialize()
         {
             _path = new List<Vector3>();
         }
 
-        public override Vector3 GetNextPoint()
+        public virtual Vector3 GetNextPoint()
         {
             try
             {
@@ -29,22 +29,22 @@ namespace CircleGame
             }
         }
 
-        public void AddPoint(Vector3 point)
+        public virtual void AddPoint(Vector3 point)
         {
             _path.Add(point);
         }
 
-        public override void ResetPath()
+        public virtual void ResetPath()
         {
             _path.Clear();
         }
 
-        public override Vector3[] GetAllPath()
+        public virtual Vector3[] GetAllPath()
         {
             return _path.ToArray();
         }
 
-        public override Vector3 DequeueNextPoint()
+        public virtual Vector3 DequeueNextPoint()
         {
             try
             {
@@ -59,12 +59,12 @@ namespace CircleGame
             }
         }
 
-        public override void Dispose()
+        public virtual void Dispose()
         {
             _path.Clear();
         }
 
-        public override bool HasNextPoint()
+        public virtual bool HasNextPoint()
         {
             return _path.Count > 0;
         }

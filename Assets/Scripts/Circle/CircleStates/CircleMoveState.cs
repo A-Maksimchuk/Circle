@@ -10,11 +10,11 @@ namespace CircleGame
     {
         Circle _circle;
         Settings _settings;
-        PathController _pathController;
+        IPathController _pathController;
 
         Vector3 _targetPosition;
 
-        public CircleMoveState(Circle circle, Settings settings, PathController pathController)
+        public CircleMoveState(Circle circle, Settings settings, IPathController pathController)
         {
             _circle = circle;
             _settings = settings;

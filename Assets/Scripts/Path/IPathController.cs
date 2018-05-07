@@ -12,5 +12,6 @@ namespace CircleGame
         Vector3[] GetAllPath();
         Vector3 DequeueNextPoint();
         bool HasNextPoint();
+        void AddPoint(Vector3 point);
     }
 }
