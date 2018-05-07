@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3b3f409e0ca2942ac931c160c05a9b, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  Circle:
+  MovingState:
     Move:
-      moveSpeed: 10
-      inaccuracy: 0.1
+      moveSpeed: 1
+      inaccuracy: 0.05

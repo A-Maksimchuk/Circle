@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public abstract class CircleState : IDisposable
+public abstract class MovableState : IDisposable
 {
 
     public abstract void Update();

@@ -12,24 +12,24 @@ namespace CircleGame
         [SerializeField]
         float _minVertexDistance;
 
-        Circle _circle;
+        IMovableObject _movableObject;
         Vector3 _lastPosition;
 
 
         [Inject]
-        public void Construct(Circle circle)
+        public void Construct(IMovableObject movableObject)
         {
-            _circle = circle;
-            _lastPosition = _circle.Position;
+            _movableObject = movableObject;
+            _lastPosition = _movableObject.GetPosition();
         }
 
 
 
         void RedrawLine()
         {
-            if (Vector3.Distance(_lastPosition, _circle.Position)>_minVertexDistance)
+            if (Vector3.Distance(_lastPosition, _movableObject.GetPosition())>_minVertexDistance)
             {
-                _lastPosition = _circle.Position;
+                _lastPosition = _movableObject.GetPosition();
                 _lineRenderer.positionCount = _lineRenderer.positionCount + 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, _lastPosition);
             }
@@ -38,7 +38,6 @@ namespace CircleGame
         
         void Update()
         {
-            if(_circle.GetState()==CircleStates.Moving)
                 RedrawLine();
         }
     }

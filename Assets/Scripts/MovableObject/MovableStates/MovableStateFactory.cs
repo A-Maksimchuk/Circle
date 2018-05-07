@@ -4,36 +4,31 @@ using UnityEngine;
 
 namespace CircleGame
 {
-    public enum CircleStates
-    {
-        Moving,
-        Waiting
-    }
 
-    public class CircleStateFactory 
+    public class MovableStateFactory
     {
 
-        readonly CircleWaitState.Factory _waitingFactory;
-        readonly CircleMoveState.Factory _movingFactory;
+        readonly MovableWaitState.Factory _waitingFactory;
+        readonly MovableMoveState.Factory _movingFactory;
 
-        public CircleStateFactory(
-            CircleWaitState.Factory waitingFactory,
-            CircleMoveState.Factory movingFactory
+        public MovableStateFactory(
+            MovableWaitState.Factory waitingFactory,
+            MovableMoveState.Factory movingFactory
             )
         {
             _waitingFactory = waitingFactory;
             _movingFactory = movingFactory;
         }
 
-        public CircleState CreateState(CircleStates state)
+        public MovableState CreateState(MovableObjectStates state)
         {
             switch (state)
             {
-                case CircleStates.Waiting:
+                case MovableObjectStates.Waiting:
                     {
                         return _waitingFactory.Create();
                     }
-                case CircleStates.Moving:
+                case MovableObjectStates.Moving:
                     {
                         return _movingFactory.Create();
                     }

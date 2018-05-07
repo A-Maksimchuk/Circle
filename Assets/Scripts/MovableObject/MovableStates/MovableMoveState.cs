@@ -6,25 +6,25 @@ using Zenject;
 
 namespace CircleGame
 {
-    public class CircleMoveState : CircleState
+    public class MovableMoveState : MovableState
     {
-        Circle _circle;
+        IMovableObject _movableObject;
         Settings _settings;
         IPathController _pathController;
 
         Vector3 _targetPosition;
 
-        public CircleMoveState(Circle circle, Settings settings, IPathController pathController)
+        public MovableMoveState(IMovableObject movableObject, Settings settings, IPathController pathController)
         {
-            _circle = circle;
+            _movableObject = movableObject;
             _settings = settings;
             _pathController = pathController;
-            _targetPosition = _circle.Position;
+            _targetPosition = _movableObject.GetPosition();
         }
 
         public override void Start()
         {
-            _targetPosition = _circle.Position;
+            _targetPosition = _movableObject.GetPosition();
         }
 
         public override void Update()
@@ -34,17 +34,18 @@ namespace CircleGame
 
         void Move()
         {
-            _circle.Position = Vector3.MoveTowards(_circle.Position, _targetPosition, Mathf.Min(1.0f, _settings.moveSpeed * Time.deltaTime));
-            if(Vector3.Distance(_circle.Position, _targetPosition) < _settings.inaccuracy)
+            var objectPosition = Vector3.MoveTowards(_movableObject.GetPosition(), _targetPosition, Mathf.Min(1.0f, _settings.moveSpeed * Time.deltaTime));
+            _movableObject.SetPosition(objectPosition);
+            if (Vector3.Distance(_movableObject.GetPosition(), _targetPosition) < _settings.inaccuracy)
             {
                 if (_pathController.HasNextPoint())
                 {
                     _targetPosition = _pathController.DequeueNextPoint();
-                    _targetPosition.z = _circle.Position.z;
+                    _targetPosition.z = _movableObject.GetPosition().z;
                 }
                 else
                 {
-                    _circle.ChangeState(CircleStates.Waiting);
+                    _movableObject.ChangeState(MovableObjectStates.Waiting);
                 }
                 
             }
@@ -58,7 +59,7 @@ namespace CircleGame
             public float inaccuracy;
         }
 
-        public class Factory : Factory<CircleMoveState>
+        public class Factory : Factory<MovableMoveState>
         {
         }
     }

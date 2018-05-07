@@ -18,9 +18,9 @@ namespace CircleGame
 
         void InstallCircle()
         {
-            Container.Bind<CircleStateFactory>().AsSingle();
-            Container.BindFactory<CircleWaitState, CircleWaitState.Factory>().WhenInjectedInto<CircleStateFactory>();
-            Container.BindFactory<CircleMoveState, CircleMoveState.Factory>().WhenInjectedInto<CircleStateFactory>();
+            Container.Bind<MovableStateFactory>().AsSingle();
+            Container.BindFactory<MovableWaitState, MovableWaitState.Factory>().WhenInjectedInto<MovableStateFactory>();
+            Container.BindFactory<MovableMoveState, MovableMoveState.Factory>().WhenInjectedInto<MovableStateFactory>();
         }
     }
 }

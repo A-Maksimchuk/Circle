@@ -9,10 +9,10 @@ using CircleGame;
 public class SpeedController : MonoBehaviour {
 
     Slider _slider;
-    CircleMoveState.Settings _settings;
+    MovableMoveState.Settings _settings;
 
     [Inject]
-    public void Constructor(CircleMoveState.Settings settings)
+    public void Constructor(MovableMoveState.Settings settings)
     {
         _settings = settings;
         _slider = GetComponent<Slider>();

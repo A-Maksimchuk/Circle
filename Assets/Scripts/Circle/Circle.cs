@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -6,15 +7,14 @@ using Zenject;
 namespace CircleGame
 {
 
-    public class Circle : MonoBehaviour
+    public class Circle : MonoBehaviour, IMovableObject
     {
 
-        CircleState _state = null;
-        CircleStateFactory _stateFactory;
-        CircleStates _circleState;
+        MovableState _state = null;
+        MovableStateFactory _stateFactory;
 
         [Inject]
-        public void Construct(CircleStateFactory stateFactory)
+        public void Construct(MovableStateFactory stateFactory)
         {
             _stateFactory = stateFactory;
         }
@@ -27,7 +27,7 @@ namespace CircleGame
 
         public void Start()
         {
-            ChangeState(CircleStates.Waiting);
+            ChangeState(MovableObjectStates.Waiting);
         }
 
         public void Update()
@@ -35,21 +35,28 @@ namespace CircleGame
             _state.Update();
         }
 
-        public CircleStates GetState()
+        public Vector3 GetPosition()
         {
-            return _circleState;
+            return transform.position;
         }
 
-        public void ChangeState(CircleStates state)
+        public void ChangeState(MovableObjectStates state)
         {
             if (_state != null)
             {
                 _state.Dispose();
                 _state = null;
             }
-            _circleState = state;
             _state = _stateFactory.CreateState(state);
             _state.Start();
         }
+
+        public void SetPosition(Vector3 position)
+        {
+            
+            transform.position = position;
+
+        }
+
     }
 }

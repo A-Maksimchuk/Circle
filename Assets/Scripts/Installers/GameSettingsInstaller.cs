@@ -8,17 +8,17 @@ namespace CircleGame
     public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
     {
 
-        public CircleSettings Circle;
+        public MovingSettings MovingState;
 
         [Serializable]
-        public class CircleSettings
+        public class MovingSettings
         {
-            public CircleMoveState.Settings Move;
+            public MovableMoveState.Settings Move;
         }
 
         public override void InstallBindings()
         {
-            Container.BindInstances(Circle.Move);
+            Container.BindInstances(MovingState.Move);
         }
     }
 }

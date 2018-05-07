@@ -6,24 +6,24 @@ using Zenject;
 
 namespace CircleGame
 {
-    public class CircleWaitState : CircleState
+    public class MovableWaitState : MovableState
     {
         PathController _pathController;
-        Circle _circle;
+        IMovableObject _movableObject;
 
-        public CircleWaitState(PathController pathController, Circle circle)
+        public MovableWaitState(PathController pathController, IMovableObject movableObject)
         {
             _pathController = pathController;
-            _circle = circle;
+            _movableObject = movableObject;
         }
 
         public override void Update()
         {
             if (_pathController.HasNextPoint())
-                _circle.ChangeState(CircleStates.Moving);
+                _movableObject.ChangeState(MovableObjectStates.Moving);
         }
 
-        public class Factory : Factory<CircleWaitState>
+        public class Factory : Factory<MovableWaitState>
         {
         }
     }
